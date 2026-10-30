@@ -323,6 +323,7 @@ static void napp_retsize(void *pPointer, real32_t nWidth, real32_t nHeight)
 
 
 RING_FUNC(ring_osmain) {
+	RING_API_IGNORECPOINTERTYPE ;
 	napp_setcode(&cNAppCreateCode, "create_gui()");
 	napp_setcode(&cNAppUpdateCode, NULL);
 	napp_setcode(&cNAppDestroyCode, NULL);
@@ -330,6 +331,7 @@ RING_FUNC(ring_osmain) {
 }
 
 RING_FUNC(ring_osmain_sync) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISNUMBER(1) ) {
 		RING_API_ERROR(RING_API_BADPARATYPE);
@@ -342,6 +344,7 @@ RING_FUNC(ring_osmain_sync) {
 }
 
 RING_FUNC(ring_osmain_run) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 4) ) return;
 	if ( ! ( RING_API_ISSTRING(1) && RING_API_ISSTRING(2) && RING_API_ISNUMBER(3) && RING_API_ISSTRING(4) ) ) {
 		RING_API_ERROR(RING_API_BADPARATYPE);
@@ -354,14 +357,17 @@ RING_FUNC(ring_osmain_run) {
 }
 
 RING_FUNC(ring_osmain_time) {
+	RING_API_IGNORECPOINTERTYPE ;
 	RING_API_RETNUMBER(nNAppCurrTime);
 }
 
 RING_FUNC(ring_osmain_prevtime) {
+	RING_API_IGNORECPOINTERTYPE ;
 	RING_API_RETNUMBER(nNAppPrevTime);
 }
 
 RING_FUNC(ring_create_event) {
+	RING_API_IGNORECPOINTERTYPE ;
 
 	Listener *pListener;
 	char *cEvent;
@@ -390,25 +396,29 @@ RING_FUNC(ring_create_event) {
 	void *object = (void *) ring_list_getstring(pEventsList,ring_list_getsize(pEventsList));
 
 	pListener = listener_imp(object, (FPtr_event_handler) i_OnEvent);
-	RING_API_RETCPOINTER(pListener,"Listener *");
+	RING_API_RETCPOINTER(pListener,"Listener");
 }
 
 RING_FUNC(ring_clean_events) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if (pEventsList == NULL) return ;
 	pEventsList = ring_list_delete(pEventsList);
 }
 
 RING_FUNC(ring_event_object) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if (pEvent == NULL) return ;
 	RING_API_RETCPOINTER(pEvent,"Event *");
 }
 
 RING_FUNC(ring_event_sender_object) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkevent(pPointer) ) return;
 	RING_API_RETCPOINTER(event_sender_imp(pEvent, NULL),"void");
 }
 
 RING_FUNC(ring_event_params) {
+	RING_API_IGNORECPOINTERTYPE ;
 	List *pList;
 	uint32_t nType;
 	void *pParams;
@@ -568,6 +578,7 @@ RING_FUNC(ring_event_params) {
 }
 
 RING_FUNC(ring_event_result_bool) {
+	RING_API_IGNORECPOINTERTYPE ;
 	bool_t *pResult;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISNUMBER(1) ) {
@@ -582,6 +593,7 @@ RING_FUNC(ring_event_result_bool) {
 }
 
 RING_FUNC(ring_event_result_number) {
+	RING_API_IGNORECPOINTERTYPE ;
 	uint32_t *pResult;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISNUMBER(1) ) {
@@ -600,6 +612,7 @@ RING_FUNC(ring_event_result_number) {
 }
 
 RING_FUNC(ring_event_result_size) {
+	RING_API_IGNORECPOINTERTYPE ;
 	EvSize *pResult;
 	if ( ! napp_checkcount(pPointer, 2) ) return;
 	if ( ! ( RING_API_ISNUMBER(1) && RING_API_ISNUMBER(2) ) ) {
@@ -619,6 +632,7 @@ RING_FUNC(ring_event_result_size) {
 }
 
 RING_FUNC(ring_event_result_text) {
+	RING_API_IGNORECPOINTERTYPE ;
 	EvTextFilter *pResult;
 	if ( ! napp_checkcount(pPointer, 2) ) return;
 	if ( ! ( RING_API_ISSTRING(1) && RING_API_ISNUMBER(2) ) ) {
@@ -644,6 +658,7 @@ RING_FUNC(ring_event_result_text) {
 }
 
 RING_FUNC(ring_event_result_cell) {
+	RING_API_IGNORECPOINTERTYPE ;
 	EvTbCell *pResult;
 	if ( ! napp_checkcount(pPointer, 2) ) return;
 	if ( ! ( RING_API_ISSTRING(1) && RING_API_ISNUMBER(2) ) ) {
@@ -664,54 +679,63 @@ RING_FUNC(ring_event_result_cell) {
 }
 
 RING_FUNC(ring_v2df_x) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((V2Df *) RING_API_GETCPOINTER(1,"V2Df"))->x);
 }
 
 RING_FUNC(ring_v2df_y) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((V2Df *) RING_API_GETCPOINTER(1,"V2Df"))->y);
 }
 
 RING_FUNC(ring_s2df_width) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((S2Df *) RING_API_GETCPOINTER(1,"S2Df"))->width);
 }
 
 RING_FUNC(ring_s2df_height) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((S2Df *) RING_API_GETCPOINTER(1,"S2Df"))->height);
 }
 
 RING_FUNC(ring_r2df_x) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((R2Df *) RING_API_GETCPOINTER(1,"R2Df"))->pos.x);
 }
 
 RING_FUNC(ring_r2df_y) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((R2Df *) RING_API_GETCPOINTER(1,"R2Df"))->pos.y);
 }
 
 RING_FUNC(ring_r2df_width) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((R2Df *) RING_API_GETCPOINTER(1,"R2Df"))->size.width);
 }
 
 RING_FUNC(ring_r2df_height) {
+	RING_API_IGNORECPOINTERTYPE ;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
 	RING_API_RETNUMBER(((R2Df *) RING_API_GETCPOINTER(1,"R2Df"))->size.height);
 }
 
 RING_FUNC(ring_view_size_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	S2Df oSize;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISCPOINTER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
@@ -720,6 +744,7 @@ RING_FUNC(ring_view_size_list) {
 }
 
 RING_FUNC(ring_view_viewport_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	V2Df oPos;
 	S2Df oSize;
 	List *pList;
@@ -735,6 +760,7 @@ RING_FUNC(ring_view_viewport_list) {
 }
 
 RING_FUNC(ring_draw_polyline_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	V2Df *pPoints;
 	uint32_t nCount;
 	if ( ! napp_checkcount(pPointer, 3) ) return;
@@ -749,6 +775,7 @@ RING_FUNC(ring_draw_polyline_list) {
 }
 
 RING_FUNC(ring_draw_polygon_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	V2Df *pPoints;
 	uint32_t nCount;
 	if ( ! napp_checkcount(pPointer, 3) ) return;
@@ -763,6 +790,7 @@ RING_FUNC(ring_draw_polygon_list) {
 }
 
 RING_FUNC(ring_draw_line_dash_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	real32_t *pPattern;
 	uint32_t nCount;
 	if ( ! napp_checkcount(pPointer, 2) ) return;
@@ -777,6 +805,7 @@ RING_FUNC(ring_draw_line_dash_list) {
 }
 
 RING_FUNC(ring_draw_fill_linear_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	real32_t *pStops;
 	color_t *pColors;
 	List *pList;
@@ -818,6 +847,7 @@ RING_FUNC(ring_draw_fill_linear_list) {
 }
 
 RING_FUNC(ring_draw_text_size) {
+	RING_API_IGNORECPOINTERTYPE ;
 	real32_t nWidth, nHeight;
 	if ( ! napp_checkcount(pPointer, 3) ) return;
 	if ( ! ( RING_API_ISCPOINTER(1) && RING_API_ISSTRING(2) && RING_API_ISNUMBER(3) ) ) {
@@ -829,6 +859,7 @@ RING_FUNC(ring_draw_text_size) {
 }
 
 RING_FUNC(ring_font_text_size) {
+	RING_API_IGNORECPOINTERTYPE ;
 	real32_t nWidth, nHeight;
 	if ( ! napp_checkcount(pPointer, 3) ) return;
 	if ( ! ( RING_API_ISCPOINTER(1) && RING_API_ISSTRING(2) && RING_API_ISNUMBER(3) ) ) {
@@ -840,6 +871,7 @@ RING_FUNC(ring_font_text_size) {
 }
 
 RING_FUNC(ring_font_families_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	List *pList;
 	uint32_t x, nCount;
 	nCount = napp_font_families_load();
@@ -852,6 +884,7 @@ RING_FUNC(ring_font_families_list) {
 }
 
 RING_FUNC(ring_color_components) {
+	RING_API_IGNORECPOINTERTYPE ;
 	List *pList;
 	uint8_t r, g, b, a;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
@@ -866,6 +899,7 @@ RING_FUNC(ring_color_components) {
 }
 
 RING_FUNC(ring_color_html_text) {
+	RING_API_IGNORECPOINTERTYPE ;
 	char_t cHTML[16];
 	if ( ! napp_checkcount(pPointer, 1) ) return;
 	if ( ! RING_API_ISNUMBER(1) ) { RING_API_ERROR(RING_API_BADPARATYPE); return; }
@@ -874,6 +908,7 @@ RING_FUNC(ring_color_html_text) {
 }
 
 RING_FUNC(ring_image_load) {
+	RING_API_IGNORECPOINTERTYPE ;
 	ferror_t nError;
 	Image *pImage;
 	if ( ! napp_checkcount(pPointer, 1) ) return;
@@ -884,6 +919,7 @@ RING_FUNC(ring_image_load) {
 }
 
 RING_FUNC(ring_image_save) {
+	RING_API_IGNORECPOINTERTYPE ;
 	ferror_t nError;
 	if ( ! napp_checkcount(pPointer, 2) ) return;
 	if ( ! ( RING_API_ISCPOINTER(1) && RING_API_ISSTRING(2) ) ) {
@@ -895,6 +931,7 @@ RING_FUNC(ring_image_save) {
 
 static void napp_comwin_file(void *pPointer, int lOpen)
 {
+	RING_API_IGNORECPOINTERTYPE ;
 	const char_t **pTypes;
 	const char_t *cFile;
 	uint32_t nCount;
@@ -920,14 +957,17 @@ static void napp_comwin_file(void *pPointer, int lOpen)
 }
 
 RING_FUNC(ring_comwin_open) {
+	RING_API_IGNORECPOINTERTYPE ;
 	napp_comwin_file(pPointer, 1);
 }
 
 RING_FUNC(ring_comwin_save) {
+	RING_API_IGNORECPOINTERTYPE ;
 	napp_comwin_file(pPointer, 0);
 }
 
 RING_FUNC(ring_comwin_choose_color) {
+	RING_API_IGNORECPOINTERTYPE ;
 	Window *pParent;
 	if ( ! napp_checkcount(pPointer, 6) ) return;
 	if ( ! ( RING_API_ISSTRING(2) && RING_API_ISNUMBER(3) && RING_API_ISNUMBER(4) &&
@@ -944,6 +984,7 @@ RING_FUNC(ring_comwin_choose_color) {
 }
 
 RING_FUNC(ring_tableview_selected_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	const ArrSt(uint32_t) *pSelected;
 	List *pList;
 	uint32_t x, nCount;
@@ -961,6 +1002,7 @@ RING_FUNC(ring_tableview_selected_list) {
 }
 
 RING_FUNC(ring_tableview_select_list) {
+	RING_API_IGNORECPOINTERTYPE ;
 	List *pList;
 	uint32_t *pRows;
 	uint32_t x, nCount;
