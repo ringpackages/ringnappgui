@@ -1,5 +1,6 @@
 # NTextView: text with fonts, sizes, styles, colors and alignment
 
+load "stdlibcore.ring"
 load "nappguilib.ring"
 
 oAppText = NULL
@@ -73,6 +74,7 @@ func countWords
 	cText = trim(oAppEditor.text())
 	nWords = 0
 	if cText != ""
+		# split() is in stdlibcore.ring
 		nWords = len(split(substr(cText, nl, " "), " "))
 	ok
 	nappMessage(NULL, "Count", "Characters: " + len(cText) + nl + "Words: " + nWords)
